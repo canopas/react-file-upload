@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build-css": "tailwindcss -i ./src/app/globals.css -o ./dist/css/output.css --minify && cp -i ./src/app/style.scss -o ./dist/css/style.scss --minify"
+    "build-css": "tailwindcss -i ./src/app/globals.css -o ./dist/css/output.css --minify && cp ./src/app/style.scss ./dist/css/style.scss"
   },
   "dependencies": {
     "next": "14.0.0",

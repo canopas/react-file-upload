@@ -39,6 +39,9 @@ export default function SingleFileUpload({
   };
 
   const selectFile = () => {
+    if (uploadingStatus) {
+      return;
+    }
     if (inputRef.current) {
       (inputRef.current as HTMLInputElement).click();
     }
@@ -100,9 +103,41 @@ export default function SingleFileUpload({
     }
   }
 
+  const handleDragOver = (event: any) => {
+    if (uploadingStatus) {
+      return;
+    }
+    event.preventDefault();
+    fileData.isDragging = true;
+  };
+
+  const handleDragLeave = (event: any) => {
+    event.preventDefault();
+    fileData.isDragging = false;
+  };
+
+  const handleDrop = (event: any) => {
+    if (uploadingStatus) {
+      return;
+    }
+    event.preventDefault();
+    fileData.isDragging = false;
+
+    const file = event.dataTransfer.files[0];
+    if (file) {
+      previewFile(file);
+    }
+  };
+
   return (
     <div className="flex">
-      <div className="cursor-pointer" onClick={selectFile}>
+      <div
+        className="cursor-pointer"
+        onClick={selectFile}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
         {children}
         <input
           type="file"

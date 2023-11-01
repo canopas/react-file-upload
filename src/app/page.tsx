@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import SingleFileUpload from "./singleFile";
+import SingleFileUpload from "../components/singleFile";
 
 export default function App() {
   const [fileData, setPreviewFileData] = useState(

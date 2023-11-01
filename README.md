@@ -2,9 +2,6 @@
 
 A versatile and user-friendly file management system built with React, Next.js and TypeScript that allows for single and multiple file uploading with a preview feature. It allows you to select files and preview them, returning an array of selected files. You can provide custom design and override classes for your file component.
 
-Checkout the live demo on, <br />
-[![codesandbox.io](https://codesandbox.io/favicon.ico)](https://codesandbox.io/p/sandbox/cranky-breeze-r4hht7?file=%2Fsrc%2Fmain.js)
-
 ## Table of Contents
 
 - [Features](#features)
@@ -12,11 +9,6 @@ Checkout the live demo on, <br />
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-- [Examples](#examples)
-  - [Square View](#square-view)
-  - [Horizontal Long Square View](#horizontal-long-square-view)
-  - [Circular View](#circular-view)
-  - [Over-ride CSS](#over-ride-css)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact Information](#contact-information)
@@ -210,10 +202,6 @@ return (
 <img src="./src/assets/images/single-file-uploading.gif"/>
 
 - Also, you can over-ride all the classes for changing the UI as per your requirement.
-
-## Examples
-
-We are providing some examples with design. so, you can easily take it and use it in your project.
 
 ### Over-ride CSS
 
