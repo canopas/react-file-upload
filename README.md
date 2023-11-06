@@ -1,6 +1,13 @@
-# File Management with Preview
+# File Management with Preview - Fully Customized
 
-A versatile and user-friendly file management system built with React, Next.js and TypeScript that allows for single and multiple file uploading with a preview feature. It allows you to select files and preview them, returning an array of selected files. You can provide custom design and override classes for your file component.
+A versatile and user-friendly file management system built with React, Next.js and TypeScript that allows for single and multiple file uploading with a preview feature. It allows you to select files and preview them, returning an array of selected files. It allows customizing design by overriding the style classes.
+
+<img src="./gifs/full.gif"/>
+
+Checkout the live demo on, codesandbox <br />
+[![codesandbox.io](https://codesandbox.io/favicon.ico)](https://codesandbox.io/p/sandbox/cranky-breeze-r4hht7?file=%2Fsrc%2Fmain.js)
+
+---
 
 ## Table of Contents
 
@@ -8,10 +15,19 @@ A versatile and user-friendly file management system built with React, Next.js a
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+- [Examples](#examples)
+  - [Canvas View](#canvas-view)
+  - [Square View](#square-view)
+  - [Horizontal Long Square View](#horizontal-long-square-view)
+  - [Circular View](#circular-view)
+  - [Over-ride CSS](#over-ride-css)
+- [Properties and Events](#properties-and-events)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact Information](#contact-information)
+
+---
 
 ## Features
 
@@ -19,189 +35,65 @@ A versatile and user-friendly file management system built with React, Next.js a
 - **Multiple File Management:** Easily manage multiple files.
 - **File Preview:** Provides a preview of uploaded files (e.g., images, videos, gifs).
 - **Responsive Design:** Ensures a seamless experience on various devices.
+- **Fully customized:** Customize file upload UI as per your requirements
+
+---
 
 ## Getting Started
 
-Follow these instructions to set up and run the project on your local machine.
+Follow below instructions to configure this package into your project.
 
 ### Prerequisites
 
 Before you begin, make sure you have the following software installed:
 
-- Node.js: [https://nodejs.org/](https://nodejs.org/)
-- A [Next.js](https://nextjs.org/) project bootstrapped with [create-next-app](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-```
-> npm install -D sass
-```
+- [Node.js](https://nodejs.org/) - v20.x
+- React with Next.js
+- sass
 
 ### Installation
 
-To use this library, you can install it via npm:
+Using npm:
 
 ```
-> npm install @canopassoftware/vue-file-upload
+npm install @canopassoftware/vue-file-upload
 ```
 
-Make sure to check the library's documentation for any additional setup or configuration steps.
+Using yarn:
 
-## Usage
-
-To manage and preview files with this library, follow these steps:
-
-### Import the library into your file
-
-```js
-// for CommonJS
-const { SingleFileUpload, MultipleFileUpload } = require('@canopassoftware/vue-file-upload')
-
-OR
-// for esModules
-import { SingleFileUpload, MultipleFileUpload } from '@canopassoftware/vue-file-upload'
+```
+yarn add @canopassoftware/vue-file-upload
 ```
 
-Now, you can use that imported component with adding your custom UI for file uploading. Here are some examples of how to use the imported component:
+---
 
-### Single File Upload Management
+## Examples
 
-```js
-import Image from "next/image";
-import React, { useState } from "react";
-import SingleFileUpload from "./singleFile";
+We are providing some examples with design. so, you can easily take it and use into your project.
 
-export default function App() {
-  const [fileData, setPreviewFileData] = useState(
-    {} as {
-      previewType: string;
-      previewUrl: string | ArrayBuffer | null;
-      previewName: string;
-      isDragging: boolean;
-      isLoading: boolean;
-    }
-  );
+### Canvas View
 
-  const getPreviewFileData = (file: any) => {
-    setPreviewFileData(file);
-  };
+[view code](./examples/CanvasView.vue)
 
-  const [uploadingStatus, setUploadingData] = useState(false);
+<img src="./gifs/canvas-view.gif"/>
 
-  const isUploading = (flag: boolean) => {
-    setUploadingData(flag);
+### Square View
 
-    if (flag) {
-      setTimeout(() => {
-        setUploadingData(!flag);
-      }, 5000);
-    }
-  };
+[view code](./examples/SquareView.vue)
 
-  const [getFile, setFileData] = useState({});
+<img src="./gifs/square-view.gif"/>
 
-  const getFileData = (file: any) => {
-    setFileData(file);
-  };
-}
-```
+### Horizontal Long Square View
 
-### Description
+[view code](./examples/LongSquareView.vue)
 
-- In the below html code we provided default design for file management, you can modify this design according to your requirements.
-- The `getPreview` prop containing `file` object with keys `previewType`, `previewUrl`, `previewName`, and `isDragging` for showing preview. like,
+<img src="./gifs/long-square-view.gif"/>
 
-```sh
-file: {
-  previewType: 'video',
-  previewUrl: 'data:image/jpeg;base64,/9j/D1AAAACRsdW1pAAAD...',
-  previewName: 'a152148640581.62d918f12a0b4.mp4',
-  isDragging: false
-}
-```
+### Circular View
 
-- previewType: - Type of the preview. like, file is image or video
-- previewUrl: - URL of the file preview
-- previewName: - Preview file name
-- isDragging: - You will get it true when you dragging the file on your design
+[view code](./examples/RoundView.vue)
 
-- You need to manage it by calling a function and get value of that object in variable as we have defined above by using `getPreviewFileData()`.
-
-```html
-return (
-    <main className="flex min-h-screen flex-col justify-between p-5">
-      <SingleFileUpload
-        getPreview={getPreviewFileData}
-        getFileObj={getFileData}
-        isUploading={isUploading}
-        uploadingStatus={uploadingStatus}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
-      >
-        <div className="m-5">
-          <div className="flex items-center justify-center">
-            {!fileData || !fileData.previewUrl ? (
-              <label className="flex flex-col items-center justify-center w-full h-56 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                <div className="flex flex-col items-center justify-center pt-5 pb-6 px-10">
-                  <svg
-                    className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 16"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                    />
-                  </svg>
-                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span className="font-semibold">Click to upload</span> or
-                    drag and drop
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    SVG, PNG, JPG or GIF
-                  </p>
-                </div>
-              </label>
-            ) : (
-              <div className="flex items-center justify-center">
-                {fileData.previewType != "video" ? (
-                  <Image
-                    className="object-contain rounded-2xl w-72 h-56"
-                    src={fileData.previewUrl as string}
-                    height={224}
-                    width={300}
-                    alt="image"
-                  />
-                ) : (
-                  <video
-                    autoPlay
-                    loop
-                    className="h-64 w-72 object-contain rounded-2xl"
-                  >
-                    <source
-                      src={fileData.previewUrl as string}
-                      type="video/mp4"
-                    />
-                  </video>
-                )}
-              </div>
-            )}
-          </div>
-          <p className="flex items-center justify-center text-center">
-            {fileData ? fileData.previewName : ""}
-          </p>
-        </div>
-      </SingleFileUpload>
-    </main>
-  );
-```
-
-<img src="./src/assets/images/single-file-uploading.gif"/>
-
-- Also, you can over-ride all the classes for changing the UI as per your requirement.
+<img src="./gifs/round-view.gif"/>
 
 ### Over-ride CSS
 
@@ -230,6 +122,132 @@ For example., <br>
 }
 ```
 
+---
+
+## Properties and Events
+
+### props
+
+- **callback="handleFileUploading"**
+
+  - `required`
+  - **Description:** Add your upload callback function while receive the selected file/files
+
+- **uploadedFile="setPreviewFileData"** - For single file component
+
+  - `required`
+  - Uploaded file object with below format,
+    ```
+    {
+      fileType: string,
+      fileUrl: string,
+      fileName: string
+    }
+    ```
+
+- **uploadedFiles="setPreviewFilesData"** - For multiple file component
+
+  - `required`
+  - Uploaded files array with below format,
+    ```
+    [
+      {
+        fileType: string,
+        fileUrl: string,
+        fileName: string
+      }
+    ]
+    ```
+
+- **uploadBtnText="'Upload'"**
+
+  - **default** : Upload
+  - Text for save or upload file button
+
+- **progressBtnText="'Uploading...'"**
+
+  - **default** : Uploading...
+  - Text for the progress bar, showing file uploading under the process
+
+- **removeBtnText="'Uploading...'"**
+
+  - **default** : x
+  - Text for remove file button
+
+- **accept="'image/jpg, image/jpeg, image/png, video/mp4, audio/mp3, application/zip'"**
+
+  - Validation for file type. By default it will select all the type of file.
+
+- **(filetype)Preview="'(file location)'"**
+  - **default** : Default file icons as per file types
+  - Set path for your customized icon if needed
+
+---
+
+## Usage
+
+To manage and preview files with this library, follow these steps:
+
+### Import the library into your file
+
+```js
+// using CommonJS
+const { SingleFileUpload, MultipleFileUpload } = require("@canopassoftware/vue-file-upload");
+
+OR;
+// using esModules
+import { SingleFileUpload, MultipleFileUpload } from "@canopassoftware/vue-file-upload";
+```
+
+### Creating custom UI with file preview
+
+- You can customize file uploading UI in inner part of component.
+
+### Single File Upload Management
+
+```js
+"use client";
+
+import Image from "next/image";
+import React, { useState } from "react";
+import { SingleFileUpload } from '@canopassoftware/vue-file-upload';
+
+export default function App() {
+  const [previewFileData, setPreviewFileData] = useState(
+    {} as {
+      previewType: string;
+      previewUrl: string | ArrayBuffer | null;
+      previewName: string;
+      isDragging: boolean;
+    }
+  );
+
+  const handleFileUploading = async (file: any) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setPreviewFileData({
+      previewType: "image",
+      previewUrl: "https://picsum.photos/300/224",
+      previewName: file.name,
+      isDragging: false,
+    });
+  };
+```
+
+```html
+  return (
+    <main className="min-h-screen flex flex-col justify-between p-5">
+      <SingleFileUpload
+        uploadedFile={setPreviewFileData}
+        callback={handleFileUploading}
+        uploadBtn={"Save"}
+        progressBtn={"Saving..."}
+      >
+      </SingleFileUpload>
+    </main>
+  );
+}
+```
+
 ## Contributing
 
 We welcome contributions from the community. To contribute to this project, please follow these guidelines:
@@ -243,8 +261,8 @@ We welcome contributions from the community. To contribute to this project, plea
 
 ## License
 
-This project is licensed under the MIT.
+This project is licensed under the [MIT](https://github.com/canopas/vue-file-upload/blob/main/LICENSE).
 
 ## Contact Information
 
-If you have questions or need support, you can reach out to us at GitHub Profile.
+Vue file upload is owned and maintained by the [Canopas team](https://canopas.com/). You can reach out them on Github at [canopas](https://github.com/canopas) for questions or need support.

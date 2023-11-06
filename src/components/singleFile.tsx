@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import pdfPreviewImg from "../assets/images/pdf-icon.png";
 import textPreviewImg from "../assets/images/text-icon.png";
 import audioPreviewImg from "../assets/images/music-icon.png";
@@ -9,14 +9,10 @@ import zipPreviewImg from "../assets/images/zip-icon.png";
 import sqlPreviewImg from "../assets/images/sql-icon.png";
 import filePreviewImg from "../assets/images/file-icon.png";
 import { StaticImageData } from "next/image";
-var fileObj: any,
-  flag: number = 0;
 
 export default function SingleFileUpload({
-  getPreview,
-  getFileObj,
-  isUploading,
-  uploadingStatus,
+  uploadedFile,
+  callback,
   uploadBtn = "Upload",
   progressBtn = "Uploading...",
   pdfPreview = pdfPreviewImg,
@@ -28,7 +24,8 @@ export default function SingleFileUpload({
   filePreview = filePreviewImg,
   children,
 }: any) {
-  const inputRef = useRef(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [fileObj, setFileObj] = useState({});
 
   const fileData = {} as {
     previewType: string;
@@ -38,8 +35,10 @@ export default function SingleFileUpload({
     isLoading: boolean;
   };
 
+  const inputRef = useRef(null);
+
   const selectFile = () => {
-    if (uploadingStatus) {
+    if (isUploading) {
       return;
     }
     if (inputRef.current) {
@@ -80,8 +79,8 @@ export default function SingleFileUpload({
         fileData.previewUrl = filePreview;
       }
       fileData.previewName = file.name;
-      fileObj = file;
-      getPreview(fileData);
+      setFileObj(file);
+      uploadedFile(fileData);
     };
     reader.onerror = (error) => {
       console.error(`Error while reading file ${file.name}: ${error}`);
@@ -89,22 +88,18 @@ export default function SingleFileUpload({
     reader.readAsDataURL(file);
   };
 
-  const uploadingFunction = () => {
-    flag = 1;
-    isUploading(true);
-    getFileObj(fileObj);
+  const uploadingFunction = async () => {
+    setIsUploading(true);
+
+    await callback(fileObj);
+
+    console.log(uploadedFile)
+
+    setIsUploading(false);
   };
 
-  if (!uploadingStatus) {
-    if (flag == 1) {
-      flag = 0;
-      getPreview({});
-      fileObj = null;
-    }
-  }
-
   const handleDragOver = (event: any) => {
-    if (uploadingStatus) {
+    if (isUploading) {
       return;
     }
     event.preventDefault();
@@ -117,7 +112,7 @@ export default function SingleFileUpload({
   };
 
   const handleDrop = (event: any) => {
-    if (uploadingStatus) {
+    if (isUploading) {
       return;
     }
     event.preventDefault();
@@ -148,7 +143,7 @@ export default function SingleFileUpload({
       </div>
       <div
         className={
-          uploadingStatus
+          isUploading
             ? "progress progress-striped active upload-btn relative"
             : "upload-btn relative"
         }
@@ -156,14 +151,14 @@ export default function SingleFileUpload({
         <button
           type="button"
           className={
-            uploadingStatus
+            isUploading
               ? "progress-bar cursor-wait flex items-center justify-center bg-slate-700 dark:text-slate-300 dark:bg-blue-700 text-white flex-none py-3 px-8 rounded-full bottom-0 absolute disabled:opacity-70 disabled:cursor-not-allowed"
               : "flex items-center justify-center bg-slate-700 dark:text-slate-300 dark:bg-blue-700 text-white flex-none py-3 px-8 rounded-full bottom-0 absolute disabled:opacity-70 disabled:cursor-not-allowed"
           }
           onClick={uploadingFunction}
           disabled={fileObj ? false : true}
         >
-          {uploadingStatus ? progressBtn : uploadBtn}
+          {isUploading ? progressBtn : uploadBtn}
         </button>
       </div>
     </div>

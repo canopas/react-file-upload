@@ -5,51 +5,36 @@ import React, { useState } from "react";
 import SingleFileUpload from "../components/singleFile";
 
 export default function App() {
-  const [fileData, setPreviewFileData] = useState(
+  const [previewFileData, setPreviewFileData] = useState(
     {} as {
       previewType: string;
       previewUrl: string | ArrayBuffer | null;
       previewName: string;
       isDragging: boolean;
-      isLoading: boolean;
     }
   );
 
-  const getPreviewFileData = (file: any) => {
-    setPreviewFileData(file);
-  };
-
-  const [uploadingStatus, setUploadingData] = useState(false);
-
-  const isUploading = (flag: boolean) => {
-    setUploadingData(flag);
-
-    if (flag) {
-      setTimeout(() => {
-        setUploadingData(!flag);
-      }, 5000);
-    }
-  };
-
-  const [getFile, setFileData] = useState({});
-
-  const getFileData = (file: any) => {
-    setFileData(file);
+  const handleFileUploading = async (file: any) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setPreviewFileData({
+      previewType: "image",
+      previewUrl: "https://picsum.photos/300/224",
+      previewName: file.name,
+      isDragging: false,
+    });
   };
 
   return (
-    <main className="flex min-h-screen flex-col justify-between p-5">
+    <main className="min-h-screen flex flex-col justify-between p-5">
       <SingleFileUpload
-        getPreview={getPreviewFileData}
-        getFileObj={getFileData}
-        isUploading={isUploading}
-        uploadingStatus={uploadingStatus}
+        uploadedFile={setPreviewFileData}
+        callback={handleFileUploading}
         uploadBtn={"Save"}
         progressBtn={"Saving..."}
       >
         <div className="m-5">
           <div className="flex items-center justify-center">
-            {!fileData || !fileData.previewUrl ? (
+            {!previewFileData || !previewFileData.previewUrl ? (
               <label className="flex flex-col items-center justify-center w-full h-56 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                 <div className="flex flex-col items-center justify-center pt-5 pb-6 px-10">
                   <svg
@@ -78,10 +63,10 @@ export default function App() {
               </label>
             ) : (
               <div className="flex items-center justify-center">
-                {fileData.previewType != "video" ? (
+                {previewFileData.previewType != "video" ? (
                   <Image
                     className="object-contain rounded-2xl w-72 h-56"
-                    src={fileData.previewUrl as string}
+                    src={previewFileData.previewUrl as string}
                     height={224}
                     width={300}
                     alt="image"
@@ -93,7 +78,7 @@ export default function App() {
                     className="h-64 w-72 object-contain rounded-2xl"
                   >
                     <source
-                      src={fileData.previewUrl as string}
+                      src={previewFileData.previewUrl as string}
                       type="video/mp4"
                     />
                   </video>
@@ -102,7 +87,7 @@ export default function App() {
             )}
           </div>
           <p className="flex items-center justify-center text-center">
-            {fileData ? fileData.previewName : ""}
+            {previewFileData ? previewFileData.previewName : ""}
           </p>
         </div>
       </SingleFileUpload>
