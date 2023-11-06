@@ -194,7 +194,7 @@ To manage and preview files with this library, follow these steps:
 // using CommonJS
 const { SingleFileUpload, MultipleFileUpload } = require("@canopassoftware/vue-file-upload");
 
-OR;
+OR
 // using esModules
 import { SingleFileUpload, MultipleFileUpload } from "@canopassoftware/vue-file-upload";
 ```
