@@ -69,7 +69,7 @@ yarn add @canopassoftware/vue-file-upload
 
 ## Examples
 
-We are providing some examples with design. so, you can easily take it and use into your project.
+We are providing some examples with design. so, you can easily use it in your project.
 
 ### Canvas View
 

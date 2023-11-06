@@ -24,8 +24,9 @@ export default function SingleFileUpload({
   filePreview = filePreviewImg,
   children,
 }: any) {
+  const [previewFileData, setPreviewFileData] = uploadedFile;
   const [isUploading, setIsUploading] = useState(false);
-  const [fileObj, setFileObj] = useState({});
+  const [fileObj, setFileObj] = useState(null);
 
   const fileData = {} as {
     previewType: string;
@@ -80,7 +81,7 @@ export default function SingleFileUpload({
       }
       fileData.previewName = file.name;
       setFileObj(file);
-      uploadedFile(fileData);
+      setPreviewFileData(fileData);
     };
     reader.onerror = (error) => {
       console.error(`Error while reading file ${file.name}: ${error}`);
@@ -89,11 +90,13 @@ export default function SingleFileUpload({
   };
 
   const uploadingFunction = async () => {
+    if (isUploading) {
+      return;
+    }
     setIsUploading(true);
 
     await callback(fileObj);
-
-    console.log(uploadedFile)
+    setFileObj(previewFileData);
 
     setIsUploading(false);
   };

@@ -3,12 +3,14 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import SingleFileUpload from "../components/singleFile";
+import img from "../assets/images/example-img.jpg";
+import { StaticImageData } from "next/image";
 
 export default function App() {
   const [previewFileData, setPreviewFileData] = useState(
     {} as {
       previewType: string;
-      previewUrl: string | ArrayBuffer | null;
+      previewUrl: string | StaticImageData | ArrayBuffer | null;
       previewName: string;
       isDragging: boolean;
     }
@@ -18,7 +20,7 @@ export default function App() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setPreviewFileData({
       previewType: "image",
-      previewUrl: "https://picsum.photos/300/224",
+      previewUrl: img,
       previewName: file.name,
       isDragging: false,
     });
@@ -27,7 +29,7 @@ export default function App() {
   return (
     <main className="min-h-screen flex flex-col justify-between p-5">
       <SingleFileUpload
-        uploadedFile={setPreviewFileData}
+        uploadedFile={[previewFileData, setPreviewFileData]}
         callback={handleFileUploading}
         uploadBtn={"Save"}
         progressBtn={"Saving..."}
