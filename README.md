@@ -56,13 +56,13 @@ Before you begin, make sure you have the following software installed:
 Using npm:
 
 ```
-npm install @canopassoftware/vue-file-upload
+npm install @canopassoftware/react-file-upload
 ```
 
 Using yarn:
 
 ```
-yarn add @canopassoftware/vue-file-upload
+yarn add @canopassoftware/react-file-upload
 ```
 
 ---
@@ -192,16 +192,26 @@ To manage and preview files with this library, follow these steps:
 
 ```js
 // using CommonJS
-const { SingleFileUpload, MultipleFileUpload } = require("@canopassoftware/vue-file-upload");
+const { SingleFileUpload, MultipleFileUpload } = require("@canopassoftware/react-file-upload");
 
 OR
 // using esModules
-import { SingleFileUpload, MultipleFileUpload } from "@canopassoftware/vue-file-upload";
+import { SingleFileUpload, MultipleFileUpload } from "@canopassoftware/react-file-upload";
 ```
 
 ### Creating custom UI with file preview
 
 - You can customize file uploading UI in inner part of component.
+- The `file` containing `file` object with following keys, we will use this object to show preview.
+
+  ```js
+  file = file: {
+    previewType: 'video', // type of the preview. like, file is image or video
+    previewUrl: 'data:image/jpeg;base64,/9j/D1AAAACRsdW1pAAAD...', // URL of the file preview
+    previewName: 'a152148640581.62d918f12a0b4.mp4', // preview file name
+    isDragging: false // you will get it `true` when you dragging the file on design
+  }
+  ```
 
 ### Single File Upload Management
 
@@ -210,7 +220,7 @@ import { SingleFileUpload, MultipleFileUpload } from "@canopassoftware/vue-file-
 
 import Image from "next/image";
 import React, { useState } from "react";
-import { SingleFileUpload } from '@canopassoftware/vue-file-upload';
+import { SingleFileUpload } from '@canopassoftware/react-file-upload';
 
 export default function App() {
   const [previewFileData, setPreviewFileData] = useState(
@@ -222,6 +232,7 @@ export default function App() {
     }
   );
 
+  // callback function
   const handleFileUploading = async (file: any) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setPreviewFileData({
@@ -242,7 +253,61 @@ export default function App() {
         uploadBtn={"Save"}
         progressBtn={"Saving..."}
       >
+      <!-- write a code to manage file design or use code from examples -->
       </SingleFileUpload>
+    </main>
+  );
+}
+```
+
+### Multiple File Upload Management
+
+```js
+"use client";
+
+import Image from "next/image";
+import React from "react";
+import MultipleFileUpload from "@canopassoftware/react-file-upload";
+import { StaticImageData } from "next/image";
+
+export default function App() {
+  const uploadedFiles = [] as Array<{
+    fileType: string;
+    fileUrl: string | StaticImageData;
+    fileName: string;
+  }>;
+
+  // callback function
+  const handleFilesUploading = async (files: any) => {
+    const uploadedFiles = [];
+
+    for (var i = 0; i < files.length; i++) {
+      uploadedFiles.push({
+        fileType: "image",
+        fileUrl: images[i],
+        fileName: files[i].name,
+      });
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    return uploadedFiles;
+  };
+```
+
+```html
+return (
+    <main className="min-h-screen flex flex-col justify-between p-5 dark:bg-black">
+      <MultipleFileUpload
+        accept=""
+        uploadedFiles={uploadedFiles}
+        callback={handleFilesUploading}
+        uploadBtn={"Save"}
+        progressBtn={"Saving..."}
+      >
+        {(file: any) => (
+          <!-- write a code to manage file design or use code from examples -->
+        )}
+      </MultipleFileUpload>
     </main>
   );
 }
