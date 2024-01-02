@@ -1,6 +1,6 @@
 {
   "name": "@canopassoftware/react-file-upload",
-  "version": "1.1.0",
+  "version": "1.1.6",
   "description": "Show the preview of file and manage files data to upload",
   "main": "/src/app/index.ts",
   "repository": {

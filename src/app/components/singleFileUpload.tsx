@@ -1,21 +1,21 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import pdfPreviewImg from "../assets/images/pdf-icon.png";
-import textPreviewImg from "../assets/images/text-icon.png";
-import audioPreviewImg from "../assets/images/music-icon.png";
-import apkPreviewImg from "../assets/images/apk-icon.png";
-import zipPreviewImg from "../assets/images/zip-icon.png";
-import sqlPreviewImg from "../assets/images/sql-icon.png";
-import filePreviewImg from "../assets/images/file-icon.png";
+import pdfPreviewImg from "../../assets/images/pdf-icon.png";
+import textPreviewImg from "../../assets/images/text-icon.png";
+import audioPreviewImg from "../../assets/images/music-icon.png";
+import apkPreviewImg from "../../assets/images/apk-icon.png";
+import zipPreviewImg from "../../assets/images/zip-icon.png";
+import sqlPreviewImg from "../../assets/images/sql-icon.png";
+import filePreviewImg from "../../assets/images/file-icon.png";
 import { StaticImageData } from "next/image";
 
 export default function SingleFileUpload({
   accept,
   uploadedFile,
   callback,
-  uploadBtn = "Upload",
-  progressBtn = "Uploading...",
+  uploadBtnText = "Upload",
+  progressBtnText = "Uploading...",
   pdfPreview = pdfPreviewImg,
   textPreview = textPreviewImg,
   audioPreview = audioPreviewImg,
@@ -163,7 +163,7 @@ export default function SingleFileUpload({
           onClick={uploadingFunction}
           disabled={fileObj ? false : true}
         >
-          {isUploading ? progressBtn : uploadBtn}
+          {isUploading ? progressBtnText : uploadBtnText}
         </button>
       </div>
     </div>

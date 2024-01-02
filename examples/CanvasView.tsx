@@ -56,8 +56,8 @@ export default function App() {
       <SingleFileUpload
         uploadedFile={[previewFileData, setPreviewFileData]}
         callback={handleFileUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         <div className="m-5">
           <div className="flex items-center justify-center">
@@ -125,8 +125,8 @@ export default function App() {
         accept=""
         uploadedFiles={uploadedFiles}
         callback={handleFilesUploading}
-        uploadBtn={"Upload"}
-        progressBtn={"Uploading..."}
+        uploadBtnText={"Upload"}
+        progressBtnText={"Uploading..."}
       >
         {(file: any) => (
           <div className="m-5">

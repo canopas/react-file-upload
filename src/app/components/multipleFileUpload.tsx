@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState, useRef, RefObject } from "react";
-import pdfPreviewImg from "../assets/images/pdf-icon.png";
-import textPreviewImg from "../assets/images/text-icon.png";
-import audioPreviewImg from "../assets/images/music-icon.png";
-import apkPreviewImg from "../assets/images/apk-icon.png";
-import zipPreviewImg from "../assets/images/zip-icon.png";
-import sqlPreviewImg from "../assets/images/sql-icon.png";
-import filePreviewImg from "../assets/images/file-icon.png";
+import pdfPreviewImg from "../../assets/images/pdf-icon.png";
+import textPreviewImg from "../../assets/images/text-icon.png";
+import audioPreviewImg from "../../assets/images/music-icon.png";
+import apkPreviewImg from "../../assets/images/apk-icon.png";
+import zipPreviewImg from "../../assets/images/zip-icon.png";
+import sqlPreviewImg from "../../assets/images/sql-icon.png";
+import filePreviewImg from "../../assets/images/file-icon.png";
 import { StaticImageData } from "next/image";
 type InputElementType = HTMLInputElement;
 
@@ -19,8 +19,9 @@ interface Props {
     fileName: string;
   }[];
   callback: Function;
-  uploadBtn?: string;
-  progressBtn?: string;
+  removeBtnText?: string;
+  uploadBtnText?: string;
+  progressBtnText?: string;
   pdfPreview?: string | StaticImageData;
   textPreview?: string | StaticImageData;
   audioPreview?: string | StaticImageData;
@@ -39,8 +40,9 @@ export default function MultipleFileUpload({
     fileName: string;
   }>,
   callback,
-  uploadBtn = "Upload",
-  progressBtn = "Uploading...",
+  removeBtnText = "x",
+  uploadBtnText = "Upload",
+  progressBtnText = "Uploading...",
   pdfPreview = pdfPreviewImg,
   textPreview = textPreviewImg,
   audioPreview = audioPreviewImg,
@@ -81,13 +83,15 @@ export default function MultipleFileUpload({
   const [isUploading, setIsUploading] = useState(false);
   const [files, setFiles] = useState(defaultFiles);
 
-  const inputRefs = useRef<Array<RefObject<InputElementType> | null>>(new Array().fill(null));
+  const inputRefs = useRef<Array<RefObject<InputElementType> | null>>(
+    new Array().fill(null)
+  );
   const selectFile = (index: number) => {
     if (isUploading) {
       return;
     }
     if (inputRefs.current[index] && inputRefs.current[index]?.current) {
-      // inputRefs.current[index]?.current.click();
+      inputRefs.current[index]?.current.click();
     }
   };
 
@@ -324,7 +328,9 @@ export default function MultipleFileUpload({
             <input
               type="file"
               ref={(element) => {
-                inputRefs.current[index] = element ? { current: element } : null;
+                inputRefs.current[index] = element
+                  ? { current: element }
+                  : null;
               }}
               className="hidden"
               onChange={(event) => handleFileChange(event, index, "reset")}
@@ -334,7 +340,7 @@ export default function MultipleFileUpload({
             className="remove-btn bg-[#ccc] h-7 rounded-full dark:bg-stone-500 dark:text-white px-2.5"
             onClick={() => removeImg(index)}
           >
-            x
+            {removeBtnText}
           </button>
         </div>
       ))}
@@ -378,7 +384,7 @@ export default function MultipleFileUpload({
             onClick={uploadingFunction}
             disabled={filesPreview.length > 0 ? false : true}
           >
-            {isUploading ? progressBtn : uploadBtn}
+            {isUploading ? progressBtnText : uploadBtnText}
           </button>
         </div>
       </div>

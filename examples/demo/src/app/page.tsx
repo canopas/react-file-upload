@@ -56,8 +56,8 @@ export default function App() {
       <SingleFileUpload
         uploadedFile={[previewFileData, setPreviewFileData]}
         callback={handleFileUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         <div className="m-5">
           <div className="flex items-center justify-center">
@@ -125,8 +125,8 @@ export default function App() {
         accept=""
         uploadedFiles={uploadedFiles}
         callback={handleFilesUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         {(file: any) => (
           <div className="m-5">
@@ -191,8 +191,8 @@ export default function App() {
       <SingleFileUpload
         uploadedFile={[previewFileData, setPreviewFileData]}
         callback={handleFileUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         <div className="h-[100px] w-[500px] cursor-pointer mb-10 ms-5 border rounded-2xl overflow-hidden dark:border-slate-700">
           <div className="flex h-full w-full relative">
@@ -237,8 +237,8 @@ export default function App() {
         accept=""
         uploadedFiles={uploadedFiles}
         callback={handleFilesUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         {(file: any) => (
           <div className="h-[100px] w-[500px] cursor-pointer mb-10 ms-5 border rounded-2xl overflow-hidden dark:border-slate-700">
@@ -279,8 +279,8 @@ export default function App() {
       <SingleFileUpload
         uploadedFile={[previewFileData, setPreviewFileData]}
         callback={handleFileUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         <div className="h-[195px] w-[195px] cursor-pointer mx-5 bg-[#e7e7e7] rounded-full">
           <div className="flex h-full w-full relative">
@@ -323,8 +323,8 @@ export default function App() {
         accept=""
         uploadedFiles={uploadedFiles}
         callback={handleFilesUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         {(file: any) => (
           <div className="h-full w-full cursor-pointer mx-5">
@@ -363,8 +363,8 @@ export default function App() {
       <SingleFileUpload
         uploadedFile={[previewFileData, setPreviewFileData]}
         callback={handleFileUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         <div className="h-[195px] w-[195px] cursor-pointer mx-5 bg-[#e7e7e7] rounded-2xl">
           <div className="flex h-full w-full relative">
@@ -407,8 +407,8 @@ export default function App() {
         accept=""
         uploadedFiles={uploadedFiles}
         callback={handleFilesUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         {(file: any) => (
           <div className="h-full w-full cursor-pointer mx-5">

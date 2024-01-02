@@ -5,7 +5,7 @@ A versatile and user-friendly file management system built with React, Next.js a
 <img src="./gifs/full.gif"/>
 
 Checkout the live demo on, codesandbox <br />
-[![codesandbox.io](https://codesandbox.io/favicon.ico)](https://codesandbox.io/p/devbox/vibrant-river-g49j9x?file=%2Fapp%2Fpage.tsx%3A37%2C1)
+[![codesandbox.io](https://codesandbox.io/favicon.ico)](https://codesandbox.io/p/devbox/eager-mountain-n4zgs6?file=%2Fsrc%2FApp.tsx%3A29%2C40)
 
 ---
 
@@ -192,11 +192,17 @@ To manage and preview files with this library, follow these steps:
 
 ```js
 // using CommonJS
-const { SingleFileUpload, MultipleFileUpload } = require("@canopassoftware/react-file-upload");
+const {
+  SingleFileUpload,
+  MultipleFileUpload,
+} = require("@canopassoftware/react-file-upload");
 
-OR
+OR;
 // using esModules
-import { SingleFileUpload, MultipleFileUpload } from "@canopassoftware/react-file-upload";
+import {
+  SingleFileUpload,
+  MultipleFileUpload,
+} from "@canopassoftware/react-file-upload";
 ```
 
 ### Creating custom UI with file preview
@@ -250,8 +256,8 @@ export default function App() {
       <SingleFileUpload
         uploadedFile={setPreviewFileData}
         callback={handleFileUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
       <!-- write a code to manage file design or use code from examples -->
       </SingleFileUpload>
@@ -300,8 +306,9 @@ return (
         accept=""
         uploadedFiles={uploadedFiles}
         callback={handleFilesUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        removeBtnText={"remove"}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         {(file: any) => (
           <!-- write a code to manage file design or use code from examples -->

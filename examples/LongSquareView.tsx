@@ -57,8 +57,8 @@ export default function App() {
       <SingleFileUpload
         uploadedFile={[previewFileData, setPreviewFileData]}
         callback={handleFileUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         <div className="h-[100px] w-[500px] cursor-pointer mb-10 ms-5 border rounded-2xl overflow-hidden dark:border-slate-700">
           <div className="flex h-full w-full relative">
@@ -103,8 +103,8 @@ export default function App() {
         accept=""
         uploadedFiles={uploadedFiles}
         callback={handleFilesUploading}
-        uploadBtn={"Upload"}
-        progressBtn={"Uploading..."}
+        uploadBtnText={"Upload"}
+        progressBtnText={"Uploading..."}
       >
         {(file: any) => (
           <div className="h-[100px] w-[500px] cursor-pointer mb-10 ms-5 border rounded-2xl overflow-hidden dark:border-slate-700">
