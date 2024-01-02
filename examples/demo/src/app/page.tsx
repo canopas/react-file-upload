@@ -2,8 +2,10 @@
 
 import Image, { StaticImageData } from "next/image";
 import React, { useState } from "react";
-import SingleFileUpload from "./components/singleFileUpload";
-import MultipleFileUpload from "./components/multipleFileUpload";
+import {
+  SingleFileUpload,
+  MultipleFileUpload,
+} from "@canopassoftware/react-file-upload";
 import img from "../assets/images/example-img.jpg";
 import placeHolderImg from "../assets/images/placeholder.png";
 

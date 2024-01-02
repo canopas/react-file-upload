@@ -8,7 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "React file upload management",
-  description: "A file management system, allows for single and multiple file uploading with a preview feature",
+  description:
+    "A file management system, allows for single and multiple file uploading with a preview feature",
 };
 
 export default function RootLayout({
