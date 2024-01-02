@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, RefObject } from "react";
 import pdfPreviewImg from "../assets/images/pdf-icon.png";
 import textPreviewImg from "../assets/images/text-icon.png";
 import audioPreviewImg from "../assets/images/music-icon.png";
@@ -9,15 +9,36 @@ import zipPreviewImg from "../assets/images/zip-icon.png";
 import sqlPreviewImg from "../assets/images/sql-icon.png";
 import filePreviewImg from "../assets/images/file-icon.png";
 import { StaticImageData } from "next/image";
+type InputElementType = HTMLInputElement;
 
-export default function SingleFileUpload({
+interface Props {
+  accept?: string;
+  uploadedFiles?: {
+    fileType: string;
+    fileUrl: string | StaticImageData;
+    fileName: string;
+  }[];
+  callback: Function;
+  uploadBtn?: string;
+  progressBtn?: string;
+  pdfPreview?: string | StaticImageData;
+  textPreview?: string | StaticImageData;
+  audioPreview?: string | StaticImageData;
+  apkPreview?: string | StaticImageData;
+  zipPreview?: string | StaticImageData;
+  sqlPreview?: string | StaticImageData;
+  filePreview?: string | StaticImageData;
+  children: (file: {}) => React.ReactNode;
+}
+
+export default function MultipleFileUpload({
   accept = "",
   uploadedFiles = [] as Array<{
     fileType: string;
     fileUrl: string | StaticImageData;
     fileName: string;
   }>,
-  callback = {} as any,
+  callback,
   uploadBtn = "Upload",
   progressBtn = "Uploading...",
   pdfPreview = pdfPreviewImg,
@@ -27,13 +48,8 @@ export default function SingleFileUpload({
   zipPreview = zipPreviewImg,
   sqlPreview = sqlPreviewImg,
   filePreview = filePreviewImg,
-  children = (file: {
-    previewType: string;
-    previewUrl: string;
-    previewName: string;
-    isDragging: boolean;
-  }) => React.ReactNode,
-}) {
+  children,
+}: Props) {
   const defaultPreview = [] as Array<{
     previewType: string;
     previewUrl: string | StaticImageData | ArrayBuffer | null;
@@ -65,13 +81,13 @@ export default function SingleFileUpload({
   const [isUploading, setIsUploading] = useState(false);
   const [files, setFiles] = useState(defaultFiles);
 
-  let inputRefs = useRef([]);
+  const inputRefs = useRef<Array<RefObject<InputElementType> | null>>(new Array().fill(null));
   const selectFile = (index: number) => {
     if (isUploading) {
       return;
     }
-    if (inputRefs.current[index]) {
-      (inputRefs.current[index] as HTMLInputElement).click();
+    if (inputRefs.current[index] && inputRefs.current[index]?.current) {
+      // inputRefs.current[index]?.current.click();
     }
   };
 
@@ -304,11 +320,11 @@ export default function SingleFileUpload({
             onDragLeave={(event) => handleDragLeave(event, index, "reset")}
             onDrop={(event) => handleDrop(event, index, "reset")}
           >
-            {children(item)}
+            {children && children(item)}
             <input
               type="file"
               ref={(element) => {
-                inputRefs.current[index] = element;
+                inputRefs.current[index] = element ? { current: element } : null;
               }}
               className="hidden"
               onChange={(event) => handleFileChange(event, index, "reset")}

@@ -2,8 +2,10 @@
 
 import Image, { StaticImageData } from "next/image";
 import React, { useState } from "react";
-import SingleFileUpload from "../components/singleFileUpload";
-import MultipleFileUpload from "../components/multipleFileUpload";
+import {
+  SingleFileUpload,
+  MultipleFileUpload,
+} from "@canopassoftware/react-file-upload";
 import img from "../assets/images/example-img.jpg";
 import placeHolderImg from "../assets/images/placeholder.png";
 
@@ -181,9 +183,7 @@ export default function App() {
                 </div>
               )}
             </div>
-            <p className=" text-center">
-              {file ? file.previewName : ""}
-            </p>
+            <p className=" text-center">{file ? file.previewName : ""}</p>
           </div>
         )}
       </MultipleFileUpload>

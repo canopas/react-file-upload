@@ -5,7 +5,7 @@ A versatile and user-friendly file management system built with React, Next.js a
 <img src="./gifs/full.gif"/>
 
 Checkout the live demo on, codesandbox <br />
-[![codesandbox.io](https://codesandbox.io/favicon.ico)](https://codesandbox.io/p/sandbox/cranky-breeze-r4hht7?file=%2Fsrc%2Fmain.js)
+[![codesandbox.io](https://codesandbox.io/favicon.ico)](https://codesandbox.io/p/devbox/vibrant-river-g49j9x?file=%2Fapp%2Fpage.tsx%3A37%2C1)
 
 ---
 
@@ -265,10 +265,9 @@ export default function App() {
 ```js
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import React from "react";
 import MultipleFileUpload from "@canopassoftware/react-file-upload";
-import { StaticImageData } from "next/image";
 
 export default function App() {
   const uploadedFiles = [] as Array<{

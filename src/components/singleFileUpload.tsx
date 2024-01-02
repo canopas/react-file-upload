@@ -11,6 +11,7 @@ import filePreviewImg from "../assets/images/file-icon.png";
 import { StaticImageData } from "next/image";
 
 export default function SingleFileUpload({
+  accept,
   uploadedFile,
   callback,
   uploadBtn = "Upload",
@@ -122,7 +123,7 @@ export default function SingleFileUpload({
     fileData.isDragging = false;
 
     const file = event.dataTransfer.files[0];
-    if (file) {
+    if (file && (accept ? accept.split(", ").includes(file.type) : true)) {
       previewFile(file);
     }
   };
@@ -142,6 +143,7 @@ export default function SingleFileUpload({
           ref={inputRef}
           className="hidden"
           onChange={handleFileChange}
+          accept={accept}
         />
       </div>
       <div
