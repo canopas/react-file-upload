@@ -2,10 +2,13 @@
 
 import Image, { StaticImageData } from "next/image";
 import React, { useState } from "react";
-import SingleFileUpload from "./components/singleFileUpload";
-import MultipleFileUpload from "./components/multipleFileUpload";
-import img from "../../../assets/images/example-img.jpg";
-import placeHolderImg from "../../../assets/images/placeholder.png";
+import "@canopassoftware/react-file-upload/style.css"
+import {
+  SingleFileUpload,
+  MultipleFileUpload,
+} from "@canopassoftware/react-file-upload";
+import img from "../assets/images/example-img.jpg";
+import placeHolderImg from "../assets/images/placeholder.png";
 
 export default function App() {
   const [previewFileData, setPreviewFileData] = useState(

@@ -12,7 +12,6 @@
 # next.js
 /.next/
 /out/
-/dist
 
 # production
 /build
@@ -29,19 +28,9 @@ yarn-error.log*
 # local env files
 .env*.local
 
-.vscode/*
-
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# src/app/style.scss
-
-index.mjs
-index.umd.js
-next.svg
-vercel.svg
-style.css

@@ -5,7 +5,7 @@ A versatile and user-friendly file management system built with React, Next.js a
 <img src="./gifs/full.gif"/>
 
 Checkout the live demo on, codesandbox <br />
-[![codesandbox.io](https://codesandbox.io/favicon.ico)](https://codesandbox.io/p/sandbox/cranky-breeze-r4hht7?file=%2Fsrc%2Fmain.js)
+[![codesandbox.io](https://codesandbox.io/favicon.ico)](https://codesandbox.io/p/devbox/eager-mountain-n4zgs6?file=%2Fsrc%2FApp.tsx%3A29%2C40)
 
 ---
 
@@ -20,7 +20,7 @@ Checkout the live demo on, codesandbox <br />
   - [Square View](#square-view)
   - [Horizontal Long Square View](#horizontal-long-square-view)
   - [Circular View](#circular-view)
-  - [Over-ride CSS](#over-ride-css)
+  - [Use/Over-ride CSS](#useover-ride-css)
 - [Properties and Events](#properties-and-events)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -95,7 +95,13 @@ We are providing some examples with design. so, you can easily use it in your pr
 
 <img src="./gifs/round-view.gif"/>
 
-### Over-ride CSS
+### Use/Over-ride CSS
+
+- Use `style.css` for UI using,
+
+```js
+import "@canopassoftware/react-file-upload/style.css"
+```
 
 For over-riding the design of default buttons, you can over-ride it's CSS by class name. <br>
 For example., <br>
@@ -192,11 +198,17 @@ To manage and preview files with this library, follow these steps:
 
 ```js
 // using CommonJS
-const { SingleFileUpload, MultipleFileUpload } = require("@canopassoftware/react-file-upload");
+const {
+  SingleFileUpload,
+  MultipleFileUpload,
+} = require("@canopassoftware/react-file-upload");
 
-OR
+OR;
 // using esModules
-import { SingleFileUpload, MultipleFileUpload } from "@canopassoftware/react-file-upload";
+import {
+  SingleFileUpload,
+  MultipleFileUpload,
+} from "@canopassoftware/react-file-upload";
 ```
 
 ### Creating custom UI with file preview
@@ -250,8 +262,8 @@ export default function App() {
       <SingleFileUpload
         uploadedFile={setPreviewFileData}
         callback={handleFileUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
       <!-- write a code to manage file design or use code from examples -->
       </SingleFileUpload>
@@ -265,10 +277,9 @@ export default function App() {
 ```js
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import React from "react";
 import MultipleFileUpload from "@canopassoftware/react-file-upload";
-import { StaticImageData } from "next/image";
 
 export default function App() {
   const uploadedFiles = [] as Array<{
@@ -301,8 +312,9 @@ return (
         accept=""
         uploadedFiles={uploadedFiles}
         callback={handleFilesUploading}
-        uploadBtn={"Save"}
-        progressBtn={"Saving..."}
+        removeBtnText={"remove"}
+        uploadBtnText={"Save"}
+        progressBtnText={"Saving..."}
       >
         {(file: any) => (
           <!-- write a code to manage file design or use code from examples -->
